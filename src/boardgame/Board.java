@@ -38,6 +38,9 @@ public class Board {
 	}
 	
 	public void placePiece(Piece piece, Position position) {
+		if (thereIsAPiece(position)) {
+			throw new BoardException("Posição já está sendo usada" + position);
+		}
 		pieces[position.getRow()][position.getColumn()] = piece;
 		piece.position = position;
 	}
@@ -51,6 +54,9 @@ public class Board {
 	}
 	
 	public boolean thereIsAPiece(Position position) {
+		if (!positionExists(position)) {
+			throw new BoardException("Posição invalida");	
+		}
 		return piece(position) != null;
 	}
 }
